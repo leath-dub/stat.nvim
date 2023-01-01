@@ -2,7 +2,7 @@ local M = {}
 
 -- Adds highlight group infront of s
 function M.set_highlight(name, s)
-  return string.format("%%#__Stat__%s#%%s%%#Normal#", name, s)
+  return string.format("%%#__Stat__%s#%s%%#Normal#", name, s)
 end
 
 M.lookup = {}
