@@ -2,13 +2,6 @@ local M = {}
 
 -- Adds highlight group infront of s
 function M.set_highlight(name, s)
-  if (not vim.api.nvim_get_hl_by_name("Normal", "")) or
-     (not vim.api.nvim_get_hl_by_name("__Stat__" .. name, "")) then
-    vim.api.nvim_err_writeln(
-      "stat.nvim: the Normal highlight group is unset this is required by stat.nvim"
-    )
-    return nil
-  end
   return string.format("%%#__Stat__%s#%%s%%#Normal#", name, s)
 end
 
