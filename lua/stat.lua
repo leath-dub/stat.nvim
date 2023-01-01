@@ -1,5 +1,8 @@
 local M = {}
 
+-- global for module
+__Stat__ = M
+
 M.lib = require("lib")
 M.mod = require("mod")
 M.___ = { raw = true, value = "%=" }
