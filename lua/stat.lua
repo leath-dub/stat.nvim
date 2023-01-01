@@ -10,7 +10,7 @@ M.___ = { raw = true, value = "%=" }
 local ___ = M.___
 M.default_config = {
   winbar = {
-    M.mod.file
+    M.mod.file()
   },
   statusline = {
     ___,
