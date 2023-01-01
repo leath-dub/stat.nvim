@@ -1,5 +1,5 @@
 local M = {}
-local lib = require("lib")
+local lib = __Stat__.lib
 
 function M.mode()
   modes = {
