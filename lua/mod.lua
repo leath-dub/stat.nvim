@@ -13,12 +13,12 @@ function M.mode()
     ["t"] = "T"
   }
   mode = modes[vim.api.nvim_get_mode().mode]
-  return lib.set_hightlight(mode, " " .. mode .. " ")
+  return lib.set_highlight(mode, " " .. mode .. " ")
 end
 
 function M.filetype()
   filetype = string.upper(vim.bo.filetype)
-  return lib.set_hightlight("Filetype", " " .. filetype .. " ")
+  return lib.set_highlight("Filetype", " " .. filetype .. " ")
 end
 
 -- This can be a raw string, no need for expression as it is built into vim
