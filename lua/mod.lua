@@ -13,7 +13,8 @@ function M.mode()
     ["t"] = "T"
   }
   mode = modes[vim.api.nvim_get_mode().mode]
-  return lib.set_highlight(mode, " " .. mode .. " ")
+  return " " .. mode .. " "
+  -- return lib.set_highlight(mode, " " .. mode .. " ")
 end
 
 function M.filetype()
