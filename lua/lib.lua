@@ -28,7 +28,7 @@ function M:create_status_item(fn)
   end
   self.lookup[self.lookup._items] = func
   self.lookup._items = self.lookup._items + 1
-  return "%{%v:lua.stat.lib.lookup._get(" .. string.format("%d", items - 1) .. ")()%}"
+  return "%{%v:lua.stat.lib.lookup._get(" .. string.format("%d", self.lookup._items - 1) .. ")()%}"
 end
 
 function M.create_status_highlight_group(name, val)

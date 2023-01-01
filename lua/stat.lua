@@ -5,14 +5,14 @@ M.mod = require("mod")
 M.___ = { raw = true, value = "%=" }
 
 local ___ = M.___
-local default_config = {
+M.default_config = {
   winbar = {
-    M.lib.file
+    M.mod.file
   },
   statusline = {
     ___,
-    M.lib.mode,
-    M.lib.filetype
+    M.mod.mode,
+    M.mod.filetype
   },
   theme = {
     ["N"] = { fg = "bg", bg = "#83c092" },
@@ -27,14 +27,10 @@ local default_config = {
 }
 
 function M.setup(config)
-  local cfg = default_config
-  M.lib.create_status_highlight_groups(cfg.theme)
-  M.config.statusline = M.lib:parse_config(cfg.statusline)
-  M.config.winbar = M.lib:parse_config(cfg.winbar)
-
-  -- set the statusline and winbar
-  vim.opt.statusline = M.config.statusline
-  vim.opt.winbar = M.config.winbar
+  local config = config or M.default_config
+  M.lib:create_status_highlight_groups(config.theme)
+  vim.opt.statusline = M.lib:parse_config(config.statusline)
+  vim.opt.winbar = M.lib:parse_config(config.winbar)
 end
 
 return M
