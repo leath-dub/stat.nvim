@@ -25,7 +25,7 @@ function M:create_status_item(fn)
   else
     item = fn
   end
-  self.lookup[self.lookup._items] = func
+  self.lookup[self.lookup._items] = item
   self.lookup._items = self.lookup._items + 1
   return "%{%v:lua.__Stat__.lib.lookup._get(" .. string.format("%d", self.lookup._items - 1) .. ")()%}"
 end
