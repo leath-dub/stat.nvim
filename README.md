@@ -50,7 +50,7 @@ function current_bufnr()
   return __Stat__.lib.set_highlight("MyHighlight", tostring(bufnr))
 end
 ```
-Any functions must take 0 arguments ( or must be able to run with no ) and
+Any functions must take 0 arguments ( or must be able to run with none ) and
 return a **string**. The function above also
 applys the "MyHighlight" highlight group which would need to be defined in the
 ``theme`` field of the config.
