@@ -27,7 +27,7 @@ local default_config = {
 }
 
 function M.setup(config)
-  local config = config or default_config
+  local config = default_config
   M.lib.create_status_highlight_groups(config.theme)
   M.config.statusline = M.lib:parse_config(config.statusline)
   M.config.winbar = M.lib:parse_config(config.winbar)
