@@ -19,12 +19,12 @@ M.default_config = {
     M.mod.filetype
   },
   theme = {
-    ["N"] = { fg = "bg", bg = "#83c092" },
-    ["I"] = { fg = "bg", bg = "#7fbbb3" },
-    ["V"] = { fg = "bg", bg = "#dbbc7f" },
-    ["C"] = { fg = "bg", bg = "#d699b6" },
-    ["T"] = { fg = "bg", bg = "#a7c080" },
-    ["S"] = { fg = "bg", bg = "#e67e80" },
+    ["N"] = { fg = "#2d353b", bg = "#83c092" },
+    ["I"] = { fg = "#2d353b", bg = "#7fbbb3" },
+    ["V"] = { fg = "#2d353b", bg = "#dbbc7f" },
+    ["C"] = { fg = "#2d353b", bg = "#d699b6" },
+    ["T"] = { fg = "#2d353b", bg = "#a7c080" },
+    ["S"] = { fg = "#2d353b", bg = "#e67e80" },
     ["File"] = { fg = "#d3c6aa", bg = "#343f44" },
     ["Filetype"] = { fg = "#d3c6aa", bg = "#232a2e" }
   }
