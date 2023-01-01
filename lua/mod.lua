@@ -23,6 +23,9 @@ end
 
 -- This can be a raw string, no need for expression as it is built into vim
 function M.file()
+  if vim.api.nvim_buf_get_name(0) == "" then
+    return ""
+  end
   return {
     raw = true,
     value = lib.set_highlight("File", " %f ")
