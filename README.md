@@ -10,6 +10,7 @@ Laziness was the big motivator for this project, I could not be bothered
 reading the source of a standard statusline plugin these days.
 
 default config:
+
 ![default_config](https://user-images.githubusercontent.com/77889270/210185148-82f37375-1260-40f3-a586-fefb060ca999.png)
 
 # Features
