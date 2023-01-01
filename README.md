@@ -14,7 +14,14 @@ reading the source of a standard statusline plugin these days.
 - allows low level customization ( for those who have their own custom statusline )
 - abstraction over highlight groups ( the theme )
 
+# Installation
+Refer to your plugin manager ( I recommend [dep](https://github.com/chiyadev/dep) )
+
 # Configuration
+__NOTE__ you should probably make sure that you call ``setup()`` after your
+colorscheme plugin is loaded ( you can add it as a dependency in your prefered
+plugin manager)
+
 Here is the default config:
 ```lua
 local ___ = __Stat__.___
