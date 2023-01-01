@@ -19,8 +19,8 @@ Refer to your plugin manager ( I recommend [dep](https://github.com/chiyadev/dep
 
 # Configuration
 __NOTE__ you should probably make sure that you call ``setup()`` after your
-colorscheme plugin is loaded ( you can add it as a dependency in your prefered
-plugin manager)
+colorscheme plugin is loaded ( you can stat.nvim it as a dependency of your
+colorscheme in your prefered plugin manager )
 
 Here is the default config:
 ```lua
