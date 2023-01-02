@@ -16,7 +16,8 @@ M.default_config = {
   statusline = {
     ___,
     M.mod.mode,
-    M.mod.filetype
+    M.mod.filetype,
+    M.mod.git_diff
   },
   theme = {
     ["N"] = { fg = "#2d353b", bg = "#83c092" },

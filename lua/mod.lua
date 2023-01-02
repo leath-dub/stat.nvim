@@ -1,5 +1,5 @@
 local M = {}
-local lib = __Stat__.lib
+local lib = __Stat__.lib -- TODO replace with "require call"
 
 function M.mode()
   modes = {
@@ -30,6 +30,32 @@ function M.file()
     raw = true,
     value = lib.set_highlight("File", " %f ")
   }
+end
+
+local function onread(status, data)
+  if data then
+    M.git_diff_output = data
+  end
+end
+
+M.git_diff_output = ""
+
+-- shows insertions and deletions in current worktree file
+function M.git_diff()
+  local bufname = vim.api.nvim_buf_get_name(0)
+  local stdout = vim.loop.new_pipe()
+  local handle -- pre declaration neccesary
+  handle = vim.loop.spawn("git", {
+    args = {"diff", "--shortstat", bufname},
+    stdio = {nil, stdout, nil}
+  },
+  function(status)
+    stdout:read_stop()
+    stdout:close()
+    handle:close()
+  end)
+  vim.loop.read_start(stdout, onread)
+  return M.git_diff_output
 end
 
 return M
