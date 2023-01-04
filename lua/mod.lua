@@ -69,11 +69,11 @@ function M.git_diff()
     handle:close()
   end)
   vim.loop.read_start(stdout, onread)
-  local result = " "
+  local result = ""
   local insertions, deletions = M.git_diff_output[1], M.git_diff_output[2]
   if insertions and not (insertions == "0") then result = result .. "+" .. insertions .. " " end
   if deletions and not (insertions == "0") then result = result .. "-" .. deletions end
-  return result .. " "
+  return result
 end
 
 return M
