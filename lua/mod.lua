@@ -34,10 +34,6 @@ end
 
 local nnil = 0
 local function onread(err, data)
-  if nnil >= 2 then
-    M.git_diff_output = {}
-    return
-  end
   if data then
     nnil = 0
     local info = {}
@@ -47,6 +43,10 @@ local function onread(err, data)
     M.git_diff_output = info
   else
     nnil = nnil + 1
+  end
+  if nnil >= 2 then
+    M.git_diff_output = {}
+    return
   end
 end
 
