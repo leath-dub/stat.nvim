@@ -39,6 +39,8 @@ local function onread(status, data)
       table.insert(info, n)
     end
     M.git_diff_output = info
+  elseif status == 0 then
+    M.git_diff_output = {}
   end
 end
 
