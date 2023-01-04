@@ -32,21 +32,23 @@ function M.file()
   }
 end
 
+-- LibLuv seems to always call "onread" with nil data even if there was chunks
+-- previously( I assume its when it reaches EOF ). This means to distinguish
+-- between "" and that nil that is by checking if we encounter 2 subsequent
+-- nil values
 local nnil = 0
 local function onread(err, data)
   if data then
-    nnil = 0
+    nnil = 0 -- reset nnil if we get data
     local info = {}
     for n in string.gmatch(data, "(.)	") do
       table.insert(info, n)
     end
     M.git_diff_output = info
+  elseif nnil >= 2 then
+    M.git_diff_output = {}
   else
     nnil = nnil + 1
-  end
-  if nnil >= 2 then
-    M.git_diff_output = {}
-    return
   end
 end
 
