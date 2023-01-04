@@ -34,11 +34,15 @@ end
 
 local function onread(status, data)
   if data then
-    M.git_diff_output = data
+    local info = {}
+    for n in string.gmatch(data, "(.)	") do
+      table.insert(info, n)
+    end
+    M.git_diff_output = info
   end
 end
 
-M.git_diff_output = ""
+M.git_diff_output = {}
 
 -- shows insertions and deletions in current worktree file
 function M.git_diff()
@@ -46,7 +50,7 @@ function M.git_diff()
   local stdout = vim.loop.new_pipe()
   local handle -- pre declaration neccesary
   handle = vim.loop.spawn("git", {
-    args = {"diff", "--shortstat", bufname},
+    args = {"diff", "--numstat", bufname},
     stdio = {nil, stdout, nil}
   },
   function(status)
@@ -55,7 +59,7 @@ function M.git_diff()
     handle:close()
   end)
   vim.loop.read_start(stdout, onread)
-  return M.git_diff_output
+  return table.concat(M.git_diff_output, " ")
 end
 
 return M
