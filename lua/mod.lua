@@ -35,6 +35,7 @@ end
 local function onread(err, data)
   if data then
     if data == "" then
+      print("We encountered an empty string")
       M.git_diff_output = {}
       return
     end
