@@ -3,7 +3,7 @@ Another statusline ? - this statusline is a personal pursuit in a less bloated
 option.
 
 # About
-Currently it is ~ 136 LOC long. This makes it a less daunting read as it is
+Currently it is < 200 LOC long. This makes it a less daunting read as it is
 very simple, feel free to use this as a base for your own statusline or plugin.
 
 Laziness was the big motivator for this project, I could not be bothered
