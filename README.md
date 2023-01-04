@@ -11,7 +11,8 @@ reading the source of a standard statusline plugin these days.
 
 default config:
 
-![default_config](https://user-images.githubusercontent.com/77889270/210185148-82f37375-1260-40f3-a586-fefb060ca999.png)
+![default_config](https://user-images.githubusercontent.com/77889270/210636551-fa314b64-67fd-4954-8c23-dfdd80353533.png)
+
 
 # Features
 - winbar and statusline customization
