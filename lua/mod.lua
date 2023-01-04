@@ -32,31 +32,35 @@ function M.file()
   }
 end
 
--- LibLuv seems to always call "onread" with nil data even if there was chunks
--- previously( I assume its when it reaches EOF ). This means to distinguish
--- between "" and that nil that is by checking if we encounter 2 subsequent
--- nil values
+-- this parses the output from "git diff --numstat [filename]"
+local function git_diff_parse(diff_output)
+  local info = ""
+  local sign = {"+", "-"}
+  for n in string.gmatch(diff_output, "(.)	") do
+    if not (n == "0") then info = info .. " " .. sign[next(sign)] .. n end
+  end
+  return info == "" and "" or lib.set_highlight("GitDiff", info .. " ")
+end
+
+--[[
+LibLuv seems to always call "onread" with nil data even if there was chunks
+previously( I assume its when it reaches EOF ). This means to distinguish
+between "" and that nil that is by checking if we encounter 2 subsequent
+nil values
+--]]
 local nnil = 0
 local function onread(err, data)
   if data then
     nnil = 0 -- reset nnil if we get data
-    local info = {}
-    for n in string.gmatch(data, "(.)	") do
-      if n == "0" then
-        table.insert(info, nil)
-      else
-        table.insert(info, n)
-      end
-    end
-    M.git_diff_output = info
+    M.git_diff_output = git_diff_parse(data)
   elseif nnil >= 2 then
-    M.git_diff_output = {}
+    M.git_diff_output = ""
   else
     nnil = nnil + 1
   end
 end
 
-M.git_diff_output = {}
+M.git_diff_output = ""
 
 -- shows insertions and deletions in current worktree file
 function M.git_diff()
@@ -73,14 +77,7 @@ function M.git_diff()
     handle:close()
   end)
   vim.loop.read_start(stdout, onread)
-  local parser = {}
-  local insertions, deletions = M.git_diff_output[1], M.git_diff_output[2]
-  insertions = insertions and "+" .. insertions
-  deletions = deletions and "-" .. deletions
-  if insertions then table.insert(parser, insertions) end
-  if deletions then table.insert(parser, deletions) end
-  result = table.concat(parser, " ")
-  return result == "" and "" or string.format(" %s ", result)
+  return M.git_diff_output
 end
 
 return M

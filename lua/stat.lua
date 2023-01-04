@@ -27,7 +27,8 @@ M.default_config = {
     ["T"] = { fg = "#2d353b", bg = "#a7c080" },
     ["S"] = { fg = "#2d353b", bg = "#e67e80" },
     ["File"] = { fg = "#d3c6aa", bg = "#343f44" },
-    ["Filetype"] = { fg = "#d3c6aa", bg = "#232a2e" }
+    ["Filetype"] = { fg = "#d3c6aa", bg = "#232a2e" },
+    ["GitDiff"] = { fg = "#d3c6aa", bg = "#272e33" }
   }
 }
 
