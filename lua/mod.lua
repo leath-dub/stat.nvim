@@ -32,18 +32,21 @@ function M.file()
   }
 end
 
+local nnil = 0
 local function onread(err, data)
+  if nnil >= 2 then
+    M.git_diff_output = {}
+    return
+  end
   if data then
-    if data == "" then
-      print("We encountered an empty string")
-      M.git_diff_output = {}
-      return
-    end
+    nnil = 0
     local info = {}
     for n in string.gmatch(data, "(.)	") do
       table.insert(info, n)
     end
     M.git_diff_output = info
+  else
+    nnil = nnil + 1
   end
 end
 
