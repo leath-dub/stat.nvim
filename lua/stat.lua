@@ -27,9 +27,9 @@ M.default_config = {
     ["T"] = { fg = "#2d353b", bg = "#a7c080" },
     ["S"] = { fg = "#2d353b", bg = "#e67e80" },
     ["File"] = { fg = "#d3c6aa", bg = "#343f44" },
-    ["Filetype"] = { fg = "#d3c6aa", bg = "#232a2e" },
-    ["GitDiffDeletion"] = { fg = "#e67e80", bg = "#272e33" },
-    ["GitDiffInsertion"] = { fg = "#a7c080", bg = "#272e33" }
+    ["Filetype"] = { fg = "#d3c6aa", bg = "#272e33" },
+    ["GitDiffDeletion"] = { fg = "#e67e80", bg = "#232a2e" },
+    ["GitDiffInsertion"] = { fg = "#a7c080", bg = "#232a2e" }
   }
 }
 
