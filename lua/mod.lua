@@ -38,6 +38,7 @@ end
 -- nil values
 local nnil = 0
 local function onread(err, data)
+  print(nnil)
   if data then
     nnil = 0 -- reset nnil if we get data
     local info = {}
