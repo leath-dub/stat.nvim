@@ -38,7 +38,6 @@ end
 -- nil values
 local nnil = 0
 local function onread(err, data)
-  print(nnil)
   if data then
     nnil = 0 -- reset nnil if we get data
     local info = {}
@@ -70,7 +69,11 @@ function M.git_diff()
     handle:close()
   end)
   vim.loop.read_start(stdout, onread)
-  return table.concat(M.git_diff_output, " ")
+  local result = " "
+  local insertions, deletions = M.git_diff_output[1], M.git_diff_output[2]
+  if insertions and not (insertions == "0") then result = result .. "+" .. insertions .. " " end
+  if deletions and not (insertions == "0") then result = result .. "-" .. deletions end
+  return result .. " "
 end
 
 return M
