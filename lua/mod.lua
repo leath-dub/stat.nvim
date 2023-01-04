@@ -42,7 +42,11 @@ local function onread(err, data)
     nnil = 0 -- reset nnil if we get data
     local info = {}
     for n in string.gmatch(data, "(.)	") do
-      table.insert(info, n)
+      if n == "0" then
+        table.insert(info, nil)
+      else
+        table.insert(info, n)
+      end
     end
     M.git_diff_output = info
   elseif nnil >= 2 then
@@ -71,7 +75,7 @@ function M.git_diff()
   vim.loop.read_start(stdout, onread)
   local result = ""
   local insertions, deletions = M.git_diff_output[1], M.git_diff_output[2]
-  local result = string.format(" +%s -%s ", insertions or "", deletions or "")
+  local result = string.format(" %s %s ", insertions and "+" .. insertions or "", deletions and "-" .. deletions or "")
   return result
 end
 
