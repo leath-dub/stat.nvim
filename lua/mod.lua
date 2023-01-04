@@ -73,13 +73,14 @@ function M.git_diff()
     handle:close()
   end)
   vim.loop.read_start(stdout, onread)
-  local result = {}
+  local parser = {}
   local insertions, deletions = M.git_diff_output[1], M.git_diff_output[2]
   insertions = insertions and "+" .. insertions
   deletions = deletions and "-" .. deletions
-  if insertions then table.insert(result, insertions) end
-  if deletions then table.insert(result, deletions) end
-  return table.concat(result) == "" and "" or string.format(" %s ", table.concat(result, " "))
+  if insertions then table.insert(parser, insertions) end
+  if deletions then table.insert(parser, deletions) end
+  result = table.concat(parser, " ")
+  return result == "" and "" or string.format(" %s ", result)
 end
 
 return M
