@@ -34,7 +34,7 @@ M.default_config = {
 }
 
 function M.setup(config)
-  local config = config or M.default_config
+  config = config and next(config) and config or M.default_config
   M.lib:create_status_highlight_groups(config.theme)
   vim.opt.statusline = M.lib:parse_config(config.statusline)
   vim.opt.winbar = M.lib:parse_config(config.winbar)
