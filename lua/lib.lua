@@ -1,8 +1,11 @@
 local M = {}
 
 -- Adds highlight group infront of s
-function M.set_highlight(name, s)
-  return string.format("%%#__Stat__%s#%s%%#Normal#", name, s)
+function M.set_highlight(name, s, reset)
+  if reset then
+    return string.format("%%#__Stat__%s#%s%%#Normal#", name, s)
+  end
+  return string.format("%%#__Stat__%s#%s", name, s)
 end
 
 M.lookup = {}

@@ -35,11 +35,17 @@ end
 -- this parses the output from "git diff --numstat [filename]"
 local function git_diff_parse(diff_output)
   local info = ""
-  local sign = {"+", "-"}
+  local sign = {
+    "+",
+    lib.set_highlight("GitDiffDeletion", "-")
+  }
   for n in string.gmatch(diff_output, "(.)	") do
-    if not (n == "0") then info = info .. " " .. sign[next(sign)] .. n end
+    if not (n == "0") then
+      info = info .. lib.set_highlight("GitDiffInsertion", " ") .. sign[1] .. n
+    end
+    table.remove(sign, 1)
   end
-  return info == "" and "" or lib.set_highlight("GitDiff", info .. " ")
+  return info == "" and "" or info .. " "
 end
 
 --[[
