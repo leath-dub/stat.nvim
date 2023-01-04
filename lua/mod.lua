@@ -32,16 +32,17 @@ function M.file()
   }
 end
 
-local function onread(status, data)
+local function onread(err, data)
   if data then
+    if data == "" then
+      M.git_diff_output = {}
+      return
+    end
     local info = {}
     for n in string.gmatch(data, "(.)	") do
       table.insert(info, n)
     end
     M.git_diff_output = info
-  end
-  if status == 0 then
-    M.git_diff_output = {}
   end
 end
 
