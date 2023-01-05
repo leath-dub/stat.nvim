@@ -33,13 +33,13 @@ local ___ = __Stat__.___
 require("stat").setup({
   winbar = {
     ___,
-    M.mod.file()
+    __Stat__.mod.file()
   },
   statusline = {
     ___,
-    M.mod.mode,
-    M.mod.filetype,
-    M.mod.git_diff
+    __Stat__.mod.mode,
+    __Stat__.mod.filetype,
+    __Stat__.mod.git_diff
   },
   theme = {
     ["N"] = { fg = "#2d353b", bg = "#83c092" },
