@@ -39,7 +39,7 @@ local function git_diff_parse(diff_output)
     "+",
     lib.set_highlight("GitDiffDeletion", "-")
   }
-  for n in string.gmatch(diff_output, "%d+") do
+  for n in string.gmatch(diff_output, "(%d+)\t") do
     if not (n == "0") then
       info = info .. lib.set_highlight("GitDiffInsertion", " ") .. sign[1] .. n
     end
