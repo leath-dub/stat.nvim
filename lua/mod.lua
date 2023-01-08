@@ -4,9 +4,9 @@ local lib = __Stat__.lib -- TODO replace with "require call"
 function M.mode()
   modes = {
     ["n"] = "N", ["no"] = "N", ["nov"] = "N", ["noV"] = "N",
-    ["noCTRL-V"] = "N", ["niI"] = "N", ["niR"] = "N", ["niV"] = "N",
+    ["no\22"] = "N", ["niI"] = "N", ["niR"] = "N", ["niV"] = "N",
     ["nt"] = "N", ["ntT"] = "N", ["v"] = "V", ["vs"] = "V", ["V"] = "V",
-    ["Vs"] = "V", ["CTRL-V"] = "V", ["CTRL-Vs"] = "V", ["s"] = "S", ["S"] = "S",
+    ["Vs"] = "V", ["\22"] = "V", ["\22s"] = "V", ["s"] = "S", ["S"] = "S",
     ["CTRL-S"] = "S", ["i"] = "I", ["ic"] = "I", ["ix"] = "I", ["R"] = "R",
     ["Rc"] = "R", ["Rx"] = "R", ["Rvc"] = "R", ["Rvx"] = "R", ["c"] = "C",
     ["cv"] = "E", ["r"] = "N", ["rm"] = "N", ["r?"] = "N", ["!"] = "N",
