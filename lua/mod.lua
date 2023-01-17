@@ -32,6 +32,30 @@ function M.file()
   }
 end
 
+-- {{{ git status
+-- return next line from i, and return the position after '\n'
+local function get_line(str, i)
+  local result = ""
+  i = i or 1
+  while i <= str:len() do
+    if str:sub(i, i) == "\n" then
+      return result, i + 1
+    end
+    result = result .. str:sub(i, i)
+    i = i + 1
+  end
+  return ""
+end
+
+-- function that takes form "[number]\t[number]" and returns [number], [number]
+local function parse_nums(str)
+  local result = {}
+  for n in str:gmatch("(%d+)\t") do
+    table.insert(result, n)
+  end
+  return tonumber(result[1]), tonumber(result[2])
+end
+
 -- this parses the output from "git diff --numstat [filename]"
 local function git_diff_parse(diff_output)
   local info = ""
@@ -39,11 +63,21 @@ local function git_diff_parse(diff_output)
     "+",
     lib.set_highlight("GitDiffDeletion", "-")
   }
-  for n in string.gmatch(diff_output, "(%d+)\t") do
-    if not (n == "0") then
-      info = info .. lib.set_highlight("GitDiffInsertion", " ") .. sign[1] .. n
-    end
-    table.remove(sign, 1)
+  local insertions, deletions = 0, 0
+  local ins, del = 0, 0
+  local line, i = get_line(diff_output, 1)
+  while line ~= "" do
+    ins, del = parse_nums(line)
+    insertions = insertions + ins
+    deletions = deletions + del
+    line, i = get_line(diff_output, i)
+  end
+  info = info .. lib.set_highlight("GitDiffInsertion", " ")
+  if insertions ~= 0 then
+    info = info .. lib.set_highlight("GitDiffInsertion", "+") .. tostring(insertions)
+  end
+  if deletions ~= 0 then
+    info = info .. " " .. lib.set_highlight("GitDiffDeletion", "-") .. tostring(deletions)
   end
   return info == "" and "" or info .. " "
 end
@@ -85,5 +119,6 @@ function M.git_diff()
   vim.loop.read_start(stdout, onread)
   return M.git_diff_output
 end
+-- }}}
 
 return M
