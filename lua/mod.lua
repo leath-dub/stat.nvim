@@ -1,5 +1,5 @@
 local M = {}
-local lib = __Stat__.lib -- TODO replace with "require call"
+local lib = Stat.lib
 
 function M.mode()
   modes = {

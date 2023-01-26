@@ -1,7 +1,7 @@
 local M = {}
 
 -- global for module
-__Stat__ = M
+Stat = M
 
 M.lib = require("lib")
 M.mod = require("mod")

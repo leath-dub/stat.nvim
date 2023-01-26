@@ -24,22 +24,22 @@ Refer to your plugin manager ( I recommend [dep](https://github.com/chiyadev/dep
 
 # Configuration
 __NOTE__ you should probably make sure that you call ``setup()`` after your
-colorscheme plugin is loaded ( you can stat.nvim it as a dependency of your
+colorscheme plugin is loaded ( you can add stat.nvim it as a dependency of your
 colorscheme in your prefered plugin manager )
 
 Here is the default config:
 ```lua
-local ___ = __Stat__.___
+local ___ = Stat.___
 require("stat").setup({
   winbar = {
     ___,
-    __Stat__.mod.file()
+    Stat.mod.file()
   },
   statusline = {
     ___,
-    __Stat__.mod.mode,
-    __Stat__.mod.filetype,
-    __Stat__.mod.git_diff
+    Stat.mod.mode,
+    Stat.mod.filetype,
+    Stat.mod.git_diff
   },
   theme = {
     ["N"] = { fg = "#2d353b", bg = "#83c092" },
@@ -57,12 +57,12 @@ require("stat").setup({
 ```
 The basic idea is that you can provide **functions**, **strings** or **tables**
 to ``winbar`` and ``statusline`` fields. Any builtin functions are of form
-``__Stat__.mod.[function]``, however you can implement your own functions like
+``Stat.mod.[function]``, however you can implement your own functions like
 so:
 ```lua
 function current_bufnr()
   local bufnr = vim.api.nvim_get_current_buf()
-  return __Stat__.lib.set_highlight("MyHighlight", tostring(bufnr))
+  return Stat.lib.set_highlight("MyHighlight", tostring(bufnr))
 end
 ```
 Any functions must take 0 arguments ( or must be able to run with none ) and
@@ -72,7 +72,7 @@ applys the "MyHighlight" highlight group which would need to be defined in the
 
 ## Alignment
 If you want to evenly space sections of your statusline you can use the
-builtin ``__Stat__.___``(oof thats ugly :> maybe set ``local ___ = __Stat__.___``).
+builtin ``Stat.___``(oof thats ugly :> maybe set ``local ___ = Stat.___`` ?).
 If you put it before any sections, like in the default config, it will have the
 effect of right justifying the items ( I would play around with this to understand
 it fully, also refer to ``:help statusline`` in neovim )
@@ -98,7 +98,7 @@ statusline = {
 ```
 
 Also if you add more than one function or string in a table, the contents will
-be "grouped", this means that when using alignment with ``__Stat__.___`` that
+be "grouped", this means that when using alignment with ``Stat.___`` that
 section will be kept together.
 
 ## Raw
