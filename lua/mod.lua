@@ -59,10 +59,6 @@ end
 -- this parses the output from "git diff --numstat [filename]"
 local function git_diff_parse(diff_output)
   local info = ""
-  local sign = {
-    "+",
-    lib.set_highlight("GitDiffDeletion", "-")
-  }
   local insertions, deletions = 0, 0
   local ins, del = 0, 0
   local line, i = get_line(diff_output, 1)
@@ -76,8 +72,11 @@ local function git_diff_parse(diff_output)
   if insertions ~= 0 then
     info = info .. lib.set_highlight("GitDiffInsertion", "+") .. tostring(insertions)
   end
+  if insertions ~= 0 and deletions ~= 0 then
+    info = info .. " " -- add space separator
+  end
   if deletions ~= 0 then
-    info = info .. " " .. lib.set_highlight("GitDiffDeletion", "-") .. tostring(deletions)
+    info = info .. lib.set_highlight("GitDiffDeletion", "-") .. tostring(deletions)
   end
   return info == "" and "" or info .. " "
 end
