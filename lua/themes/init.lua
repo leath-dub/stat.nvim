@@ -1,7 +1,7 @@
 local M = {}
 
 local function get(module_name)
-  return require("stat.themes." .. module_name)
+  return require("themes." .. module_name)
 end
 
 setmetatable(M, {
