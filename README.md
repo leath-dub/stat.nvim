@@ -55,6 +55,26 @@ require("stat").setup({
   }
 })
 ```
+
+The ``theme`` field can be a table like above or a table (array) of tables, this means
+you can utilize the default themes (see lua/themes directory) along side other definitions
+of themes (themes are just sets of highlight group definitions), e.g
+
+```lua
+theme = {
+    ["MyHighlight"] = { fg = "#000000" },
+}
+-- Or you can do this
+theme = {
+    Stat.themes.rose_pine_moon,
+    ["MyHighlight"] = { fg = "#000000" },
+    { -- nest multipl
+        ["MyHighlight2"] = { bg = "#FFFFFF" },
+        ["ElectricBoogaloo"] = { fg = "#000000", bg ="#FFFFFF" },
+    },
+}
+```
+
 The basic idea is that you can provide **functions**, **strings** or **tables**
 to ``winbar`` and ``statusline`` fields. Any builtin functions are of form
 ``Stat.mod.[function]``, however you can implement your own functions like
