@@ -90,6 +90,10 @@ return a **string**. The function above also
 applys the "MyHighlight" highlight group which would need to be defined in the
 ``theme`` field of the config.
 
+## More Usage
+
+check out the examples/
+
 ## Alignment
 If you want to evenly space sections of your statusline you can use the
 builtin ``Stat.___``(oof thats ugly :> maybe set ``local ___ = Stat.___`` ?).
