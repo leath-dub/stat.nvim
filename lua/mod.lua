@@ -2,7 +2,7 @@ local M = {}
 local lib = Stat.lib
 
 function M.mode()
-  modes = {
+  local modes = {
     ["n"] = "N", ["no"] = "N", ["nov"] = "N", ["noV"] = "N",
     ["no\22"] = "N", ["niI"] = "N", ["niR"] = "N", ["niV"] = "N",
     ["nt"] = "N", ["ntT"] = "N", ["v"] = "V", ["vs"] = "V", ["V"] = "V",
@@ -12,12 +12,12 @@ function M.mode()
     ["cv"] = "E", ["r"] = "N", ["rm"] = "N", ["r?"] = "N", ["!"] = "N",
     ["t"] = "T"
   }
-  mode = modes[vim.api.nvim_get_mode().mode]
+  local mode = modes[vim.api.nvim_get_mode().mode]
   return lib.set_highlight(mode, " " .. mode .. " ")
 end
 
 function M.filetype()
-  filetype = string.upper(vim.bo.filetype)
+  local filetype = string.upper(vim.bo.filetype)
   if filetype == "" then
     return ""
   end
