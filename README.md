@@ -68,7 +68,7 @@ theme = {
 theme = {
     Stat.themes.rose_pine_moon,
     ["MyHighlight"] = { fg = "#000000" },
-    { -- nest multipl
+    { -- nest multiple
         ["MyHighlight2"] = { bg = "#FFFFFF" },
         ["ElectricBoogaloo"] = { fg = "#000000", bg ="#FFFFFF" },
     },
