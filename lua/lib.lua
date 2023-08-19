@@ -16,6 +16,7 @@ function M.lookup._get(i)
 end
 
 function M:create_status_item(fn)
+  local item
   if not (type(fn) == "function") then
     item = function() return fn end
   else
@@ -38,7 +39,7 @@ end
 
 function M:parse_config(config)
   local result = "%#Normal#"
-  for k, v in pairs(config) do
+  for _, v in pairs(config) do
     if type(v) == "table" then
       if v.raw then -- allows user to add something directly to statusline
         result = result .. v.value
@@ -48,10 +49,10 @@ function M:parse_config(config)
       if v.minwid then minmax = minmax .. tostring(v.minwid) end
       if v.maxwid then minmax = minmax .. "." .. tostring(v.maxwid) end
       local group = {}
-      for i, item in ipairs(v) do
+      for _, item in ipairs(v) do
         table.insert(group, self:create_status_item(item))
       end
-      dash = ""
+      local dash = ""
       if v.left_justify then dash = "-" end
       result = result .. string.format(
         "%%%s%s(%s%%)", dash, minmax, table.concat(group, v.separator or " ")
