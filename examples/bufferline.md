@@ -66,7 +66,6 @@ local function buffer_line(stat)
         res = res .. lib.set_hl_abs(hl_group) .. lib.add_margin(icon .. lib.unset_hl() .. bufname, 1) .. lib.set_hl_abs("TabLineFill")
       else
         local bfr_line_hl = lib.get_hl_val_abs("TabLineFill")
-        print(bfr_line_hl)
         local new_hl = lib.set_hl_val_abs({ fg = lib.get_hl_val_abs(hl_group).fg, bg = bfr_line_hl.bg })
         res = res .. lib.set_hl_abs(new_hl) .. lib.add_margin(icon .. lib.set_hl_abs("TabLineFill") .. bufname, 1)
       end
