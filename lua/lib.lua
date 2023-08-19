@@ -1,11 +1,86 @@
 local M = {}
 
+-- We store any anded' highlight groups here so that we don't keep creating redundant highlight groups at runtime
+
+local hl_prefix = "__Stat__"
+local hl_anon_id = 0
+
+function M.get_hl_abs(name) -- return absolute highlight name
+  return hl_prefix .. name
+end
+
+function M.set_hl(name)
+  return ("%%#%s%s#"):format(hl_prefix, name)
+end
+
+function M.set_hl_abs(name)
+  return ("%%#%s#"):format(name)
+end
+
+function M.unset_hl()
+  return M.set_hl_abs("Normal")
+end
+
+function M.get_hl_val_abs(name)
+  return vim.api.nvim_get_hl(0, { name = name })
+end
+
+local function hl_val_equal(hl_a, hl_b)
+  if #hl_a ~= #hl_b then
+    return false
+  end
+
+  for k, v in pairs(hl_a) do
+    if hl_b[k] ~= v then
+      return false
+    end
+  end
+
+  return true
+end
+
+function M.add_margin(s, sz)
+  local mg_right = 0
+  local mg_left = 0
+
+  if type(sz) == "table" then
+    mg_left = (" "):rep(sz.left)
+    mg_right = (" "):rep(sz.right)
+  else
+    mg_left = (" "):rep(sz)
+    mg_right = (" "):rep(sz)
+  end
+
+  return mg_left .. s .. mg_right
+end
+
+local cached_hl_groups = {}
+function M.set_hl_val_abs(val)
+  local hl = {}
+
+  -- Check if an identical highlight group
+  for _, v in pairs(cached_hl_groups) do
+    if hl_val_equal(v.val, val) then
+      return v.name
+    end
+  end
+
+  hl.name = hl_prefix .. "Anonymous" .. tostring(hl_anon_id)
+  hl_anon_id = hl_anon_id + 1
+  hl.val = val
+  table.insert(cached_hl_groups, hl)
+
+  vim.api.nvim_set_hl(0, hl.name, hl.val)
+
+  return hl.name
+end
+
 -- Adds highlight group infront of s
 function M.set_highlight(name, s, reset)
   if reset then
-    return string.format("%%#__Stat__%s#%s%%#Normal#", name, s)
+    return M.set_hl(name) .. s .. M.set_hl_abs("Normal")
   end
-  return string.format("%%#__Stat__%s#%s", name, s)
+  return M.set_hl(name) .. s
 end
 
 M.lookup = {}

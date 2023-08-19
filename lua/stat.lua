@@ -25,7 +25,16 @@ M.default_config = {
 
 function M.setup(config)
   config = config and next(config) and config or M.default_config
-  M.lib:create_status_highlight_groups(config.theme)
+
+  -- Setup the highlight groups
+  for k, v in pairs(config.theme) do
+    if type(k) == "number" then
+      M.lib:create_status_highlight_groups(v)
+    else
+      M.lib.create_status_highlight_group(k, v)
+    end
+  end
+
   if config.statusline then
     vim.opt.statusline = M.lib:parse_config(config.statusline)
   end
