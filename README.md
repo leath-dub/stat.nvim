@@ -135,3 +135,7 @@ statusline = {
   "More non raw stuff as before"
 }
 ```
+
+## Themes
+
+If you want to add a theme, make a pr (it needs to go in the lua/themes directory)
