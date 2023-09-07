@@ -152,7 +152,7 @@ a hidden module that lualine knows where to look. This plugin uses a tweaked ver
 lualine loads the module. Using this you do not have to set your colorscheme manually.
 
 just do the following in the theme field
-```
+```lua
     theme = stat.lib.lualine('<colorscheme plugin name>'),
 ```
 
