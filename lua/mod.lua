@@ -68,16 +68,17 @@ local function git_diff_parse(diff_output)
     deletions = deletions + del
     line, i = get_line(diff_output, i)
   end
+  local space = ""
   local hl = lib.set_highlight
   info = info .. hl("GitDiffInsertion", " ")
   if insertions ~= 0 then
-    info = info .. hl("GitDiffInsertion", "+") .. tostring(insertions)
+    info = info .. hl("GitDiffInsertion", " ") .. "+" .. tostring(insertions)
   end
   if insertions ~= 0 and deletions ~= 0 then
-    info = info .. " " -- add space separator
+    space = " "
   end
   if deletions ~= 0 then
-    info = info .. hl("GitDiffDeletion", "-") .. tostring(deletions)
+    info = info .. hl("GitDiffDeletion", " ") .. "-" .. tostring(deletions)
   end
   return info == "" and "" or info .. " "
 end
