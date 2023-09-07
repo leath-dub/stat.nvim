@@ -40,8 +40,8 @@ local function hl_val_equal(hl_a, hl_b)
 end
 
 function M.add_margin(s, sz)
-  local mg_right = 0
-  local mg_left = 0
+  local mg_right = ""
+  local mg_left = ""
 
   if type(sz) == "table" then
     mg_left = (" "):rep(sz.left)
