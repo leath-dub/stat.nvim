@@ -183,6 +183,15 @@ end
 
 function M.lualine(theme_name)
   local theme = M.load_lualine_theme(theme_name)
+  for _, sections in pairs(theme) do
+    for _, val in pairs(sections) do
+      local gui_hl = val.gui
+      if gui_hl ~= nil then
+        val[gui_hl] = true
+        val.gui = nil
+      end
+    end
+  end
   return {
     ["N"] = theme.normal.a,
     ["I"] = theme.insert.a,
