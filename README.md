@@ -18,6 +18,7 @@ default config:
 - winbar and statusline customization
 - allows low level customization ( for those who have their own custom statusline )
 - abstraction over highlight groups ( the theme )
+- **NEW** lualine theme support - see [Themes](https://github.com/leath-dub/stat.nvim#Themes)
 
 # Installation
 Refer to your plugin manager ( I recommend [dep](https://github.com/chiyadev/dep) )
@@ -143,3 +144,17 @@ statusline = {
 ## Themes
 
 If you want to add a theme, make a pr (it needs to go in the lua/themes directory)
+
+### Hijacked lualine themes
+
+A lot of coloreschemes have built in lualine support. This means that the colorscheme has
+a hidden module that lualine knows where to look. This plugin uses a tweaked version of how
+lualine loads the module. Using this you do not have to set your colorscheme manually.
+
+just do the following in the theme field
+```
+    theme = stat.lib.lualine('<colorscheme plugin name>'),
+```
+
+for more flexibility you can directly call the `stat.lib.load_lualine_theme(1)` function if you
+want to get the given colorschemes lualine config directly.
